@@ -15,20 +15,20 @@
 <title>Entre Nosotros · Mi registro</title>
 <meta name="theme-color" content="#1f4955">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,500&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: app de una columna, encabezado de marca arriba, pestañas fijas abajo; cada vista es una "hoja" tranquila */
 :root{
-  --bg:#ebe4d6;        /* crema del logo, apagado */
-  --surface:#f6f1e7;
-  --sunk:#e0d7c6;
-  --fg:#1d2e33;
-  --muted:#5c6a6c;
-  --line:#d5cab7;
+  --bg:#f7f2e9;        /* crema de la web */
+  --surface:#fbf7f0;
+  --sunk:#efe6d6;
+  --fg:#1d2f33;
+  --muted:#56686b;
+  --line:#d9cdb9;
   --brand:#1f4955;     /* azul petróleo del logo */
   --brand-soft:#d6e0e0;
-  --warm:#c47552;      /* terracota */
-  --warm-ink:#a9583a;
+  --warm:#d9906f;      /* terracota */
+  --warm-ink:#b35a33;
   --dot:#d9906f;       /* terracota del logo */
   --dot-soft:#f3dccf;
   --dot-ink:#9a4f30;
@@ -36,22 +36,23 @@
   --on-brand:#f2ebdb;
   --head-bg:#1f4955;
   --head-fg:#f2ebdb;
-  --logo-a:#f2ebdb; --logo-b:#d9906f;
-  --m1:#6e6672; --m2:#9a929c; --m3:#c4bcb0; --m4:#e6c2a8; --m5:#df9f80; --m6:#c4704d;
-  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --logo-a:#f2ebdb; --logo-b:#d9906f; --logo-c:#e3b866;
+  --m7:#4f8a5b; --m6:#79a368; --m5:#a8b86a; --m4:#e3b866; --m3:#e39c5e; --m2:#d9774f; --m1:#b0473a;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --quote:"Newsreader", Georgia, "Times New Roman", serif;
   --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --r:14px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#12252b; --surface:#183039; --sunk:#1f3a44; --fg:#efe8d8; --muted:#a6b4b4; --line:#2b4650;
-  --brand:#8fc0c9; --brand-soft:#21434d; --warm:#e3a07f; --warm-ink:#e3a07f; --dot:#e3a07f; --dot-soft:#4a3128; --dot-ink:#eab196; --danger:#f08a70; --on-brand:#10232a;
+  --bg:#0f262b; --surface:#163339; --sunk:#1c3d44; --fg:#ece3d3; --muted:#a3b3b2; --line:#29484e;
+  --brand:#8fc0c9; --brand-soft:#21434d; --warm:#e08a60; --warm-ink:#e08a60; --dot:#e3a07f; --dot-soft:#4a3128; --dot-ink:#eab196; --danger:#f08a70; --on-brand:#10232a;
   --head-bg:#173a44; --head-fg:#f2ebdb;
-  --m1:#8a8290; --m2:#6f6873; --m3:#5b5a55; --m4:#a77d66; --m5:#d0906f; --m6:#eaa781; color-scheme:dark}}
+  --m7:#6fae7c; --m6:#93bd80; --m5:#bccb80; --m4:#ecc77e; --m3:#eba774; --m2:#e48a66; --m1:#d2685a; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#12252b; --surface:#183039; --sunk:#1f3a44; --fg:#efe8d8; --muted:#a6b4b4; --line:#2b4650;
-  --brand:#8fc0c9; --brand-soft:#21434d; --warm:#e3a07f; --warm-ink:#e3a07f; --dot:#e3a07f; --dot-soft:#4a3128; --dot-ink:#eab196; --danger:#f08a70; --on-brand:#10232a;
+  --bg:#0f262b; --surface:#163339; --sunk:#1c3d44; --fg:#ece3d3; --muted:#a3b3b2; --line:#29484e;
+  --brand:#8fc0c9; --brand-soft:#21434d; --warm:#e08a60; --warm-ink:#e08a60; --dot:#e3a07f; --dot-soft:#4a3128; --dot-ink:#eab196; --danger:#f08a70; --on-brand:#10232a;
   --head-bg:#173a44; --head-fg:#f2ebdb;
-  --m1:#8a8290; --m2:#6f6873; --m3:#5b5a55; --m4:#a77d66; --m5:#d0906f; --m6:#eaa781; color-scheme:dark}
+  --m7:#6fae7c; --m6:#93bd80; --m5:#bccb80; --m4:#ecc77e; --m3:#eba774; --m2:#e48a66; --m1:#d2685a; color-scheme:dark}
 
 *{box-sizing:border-box}
 html,body{background:var(--bg)}
@@ -60,7 +61,7 @@ body{color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;
   padding-block:0 calc(88px + env(safe-area-inset-bottom,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--head-bg)}
 .wrap{max-width:620px;margin:0 auto}
-h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;line-height:1.2;margin:0}
 h2{font-size:1.65rem}
 h3{font-size:1.15rem}
 p{margin:0}
@@ -76,7 +77,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 @media (min-width:652px){header.top{margin-inline:0;border-radius:0 0 14px 14px}}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--head-fg);min-width:0}
 .brand svg{width:42px;height:38px;flex:none}
-.brand .name{font-family:var(--display);font-size:1.3rem;font-style:italic;font-weight:500;line-height:1}
+.brand .name{font-family:var(--display);font-size:1.3rem;font-weight:400;line-height:1}
 .brand .sub{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--logo-b);margin-top:3px}
 .top-actions{display:flex;gap:6px}
 .icon-btn{border:1px solid color-mix(in srgb,var(--head-fg) 40%,transparent);background:transparent;border-radius:999px;padding:7px 12px;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--head-fg);text-decoration:none}
@@ -146,7 +147,7 @@ section.view{display:grid;gap:18px}
 .tcol{border-radius:12px;padding:12px 10px;display:grid;gap:4px;text-align:center;align-content:start;background:var(--bg);border:1px solid var(--line)}
 .tcol.now{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
 .tcol .k{font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700}
-.tcol .s{font-family:var(--display);font-style:italic;font-size:.95rem;line-height:1.25}
+.tcol .s{font-family:var(--quote);font-style:italic;font-size:.95rem;line-height:1.25}
 .tcol .e{font-size:.75rem;opacity:.85}
 .senses{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;text-align:center}
 .senses div{display:grid;gap:2px;justify-items:center;font-size:.72rem;color:var(--muted);line-height:1.25}
@@ -161,9 +162,9 @@ section.view{display:grid;gap:18px}
 .trio div,.pillars div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:3px;font-size:.8rem;color:var(--muted);line-height:1.35}
 .trio b,.pillars b{color:var(--fg);font-size:.9rem}
 @media (max-width:440px){.trio{grid-template-columns:1fr}}
-.closing{font-family:var(--display);font-style:italic;font-size:1.1rem;text-align:center;color:var(--muted);max-width:44ch;margin:0 auto}
+.closing{font-family:var(--quote);font-style:italic;font-size:1.1rem;text-align:center;color:var(--muted);max-width:44ch;margin:0 auto}
 .mood{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 2px;cursor:pointer;display:grid;justify-items:center;gap:6px;font-size:.78rem;text-align:center;line-height:1.2}
-.mood .disc{width:26px;height:26px;border-radius:50%}
+.mood .disc{width:26px;height:26px;border-radius:50%;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 12%,transparent)}
 .mood[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand);background:var(--brand-soft)}
 
 input[type=text],input[type=date],textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px}
@@ -210,7 +211,7 @@ details.entry .body dd{margin:0 0 4px}
 
 /* frases */
 .quote{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px 16px;display:grid;gap:12px}
-.quote blockquote{margin:0;font-family:var(--display);font-size:1.25rem;line-height:1.4;font-style:italic}
+.quote blockquote{margin:0;font-family:var(--quote);font-size:1.25rem;line-height:1.4;font-style:italic}
 .quote .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .quote cite{font-style:normal;font-weight:600;font-size:.9rem}
 .qtop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -221,7 +222,7 @@ details.entry .body dd{margin:0 0 4px}
 
 /* guía */
 details.guide{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-details.guide summary{cursor:pointer;padding:16px 18px;font-family:var(--display);font-size:1.15rem;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details.guide summary{cursor:pointer;padding:16px 18px;font-family:var(--display);font-size:1.15rem;font-weight:400;list-style:none;display:flex;justify-content:space-between;gap:10px}
 details.guide summary::-webkit-details-marker{display:none}
 details.guide summary::after{content:"+";color:var(--brand);font-family:var(--body)}
 details.guide[open] summary::after{content:"–"}
@@ -236,7 +237,7 @@ details.guide ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
 /* profesional */
 .pro-hero{display:grid;gap:14px;justify-items:start}
 .pro-hero svg{width:88px;height:80px;background:var(--head-bg);border-radius:18px;padding:14px}
-.pro-hero .t{font-family:var(--display);font-size:2rem;font-weight:600;line-height:1.1}
+.pro-hero .t{font-family:var(--display);font-size:2rem;font-weight:400;line-height:1.1}
 .creds{display:flex;flex-wrap:wrap;gap:6px}
 .creds span{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface)}
 dl.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:baseline}
@@ -260,10 +261,10 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="logo" viewBox="-160 -145 320 290">
-    <path d="M-13 -134.5 A151 135 0 1 0 -13 134.5 L-13 115.05 A102 116 0 1 1 -13 -115.05 Z" fill="var(--logo-a)"/>
-    <path d="M13 -134.5 A151 135 0 1 1 13 134.5 L13 115.05 A102 116 0 1 0 13 -115.05 Z" fill="var(--logo-b)"/>
-    <circle cx="0" cy="0" r="25" fill="var(--logo-b)"/>
+  <symbol id="logo" viewBox="-170 -142 340 284">
+    <path fill="var(--logo-a)" d="M-12-135.94A136 136 0 1 0-12 135.94L-12 122.2A128.3 128.3 0 0 1-12-122.2Z"/>
+    <path fill="var(--logo-b)" d="M12-135.94A136 136 0 1 1 12 135.94L12 122.2A128.3 128.3 0 0 0 12-122.2Z"/>
+    <circle r="26" fill="var(--logo-c)"/>
   </symbol>
 </svg>
 
@@ -330,6 +331,11 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
       <div class="card">
         <div class="qn"><span class="num">7</span><span class="txt">Un momento de presente<span class="hint">Pausa de 1 minuto: apoye los pies, respire lento y nombre 3 cosas que ve.</span></span></div>
         <div class="q"><span class="small">Hoy pude hacer una pausa para estar presente:</span><div class="seg" id="d-pausa" style="--n:3"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="qn"><span class="num">8</span><span class="txt">Pasos orientados a mis metas u objetivos<span class="hint">¿Cuánto avancé hoy hacia lo que me propuse?</span></span></div>
+        <div class="seg" id="d-metas" style="--n:3"></div>
       </div>
 
       <div class="card">
@@ -665,14 +671,15 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
 (function(){
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const WA="5493416601847";
-const MOODS=[{v:6,t:"Muy bien"},{v:5,t:"Bien"},{v:4,t:"Más o menos"},{v:3,t:"Regular"},{v:2,t:"Mal"},{v:1,t:"Muy mal"},{v:0,t:"No sé"}];
+const MOODS=[{v:7,t:"Excelente"},{v:6,t:"Muy bien"},{v:5,t:"Bien"},{v:4,t:"Más o menos"},{v:3,t:"Regular"},{v:2,t:"Mal"},{v:1,t:"Muy mal"},{v:0,t:"No sé"}];
 const moodName=v=>(MOODS.find(m=>m.v===v)||{t:"—"}).t;
-const EMOS=["Alegría","Tranquilidad","Esperanza","Tristeza","Soledad","Miedo","Enojo","Frustración","Culpa"];
-const AREAS=["Sueño y descanso","Energía","Cuerpo y salud","Nutrición","Actividad física","Vínculos y afectos","Disfrute y tiempo libre"];
-const MALESTAR=["Dolor de cabeza","Tensión o dolor muscular","Molestias digestivas","Cansancio o agotamiento","Palpitaciones u opresión","Ninguno"];
+const EMOS=["Alegría","Tranquilidad","Esperanza","Gratitud","Amor o ternura","Orgullo","Sorpresa","Tristeza","Soledad","Miedo","Ansiedad","Angustia","Enojo","Frustración","Culpa","Vergüenza","Celos","Aburrimiento","Confusión","Asco o rechazo"];
+const AREAS=["Sueño y descanso","Energía","Cuerpo y salud","Nutrición","Actividad física","Vínculos y afectos","Estudio","Trabajo","Espiritualidad y sentido","Disfrute y tiempo libre"];
+const MALESTAR=["Dolor de cabeza","Tensión o dolor muscular","Molestias digestivas","Cansancio o agotamiento","Palpitaciones","Opresión en el pecho","Dificultad para tragar","Cambios de temperatura (calor o frío)","Visión borrosa","Mareos","Ninguno"];
 const NIVEL=["Nada","Poco","Bastante","Mucho"];
 const VOZ=["Con dureza","Mitad y mitad","Con amabilidad"];
 const PAUSA=["Sí","Un poco","No"];
+const METAS=["Nada","Algo","Mucho"];
 const DIAS=["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
 const FRASES=[
  {c:"Resiliencia",t:"Cuando ya no somos capaces de cambiar una situación, nos encontramos ante el desafío de cambiarnos a nosotros mismos.",a:"Viktor Frankl"},
@@ -733,7 +740,7 @@ function segGroup(el,opts,cb=()=>updateDayWA()){el.innerHTML="";opts.forEach(o=>
   b.onclick=()=>{const on=b.getAttribute("aria-pressed")==="true";el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed",on?"false":"true");cb()};el.appendChild(b)})}
 const getSeg=el=>(el.querySelector('[aria-pressed="true"]')||{}).textContent||"";
 const setSeg=(el,v)=>el.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.textContent===v?"true":"false"));
-segGroup($("#d-ansiedad"),NIVEL);segGroup($("#d-preocupacion"),NIVEL);segGroup($("#d-voz"),VOZ);segGroup($("#d-pausa"),PAUSA);
+segGroup($("#d-ansiedad"),NIVEL);segGroup($("#d-preocupacion"),NIVEL);segGroup($("#d-voz"),VOZ);segGroup($("#d-pausa"),PAUSA);segGroup($("#d-metas"),METAS);
 // escalas 1 a 5 por área
 function makeScale(el,items,cb){
   el.innerHTML=`<div class="scale-head"><span></span>${[1,2,3,4,5].map(n=>`<span>${n}</span>`).join("")}</div>`+
@@ -761,14 +768,14 @@ function loadDay(){
   animo=(e.animo??null);animoEl.querySelectorAll(".mood").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.v===animo?"true":"false"));
   setChips($("#d-emociones"),e.emociones);$("#d-otra").value=e.otra||"";
   setAreas(e.areas);setChips($("#d-malestar"),e.malestar);
-  setSeg($("#d-ansiedad"),e.ansiedad);setSeg($("#d-preocupacion"),e.preocupacion);setSeg($("#d-voz"),e.voz);setSeg($("#d-pausa"),e.pausa);
+  setSeg($("#d-ansiedad"),e.ansiedad);setSeg($("#d-preocupacion"),e.preocupacion);setSeg($("#d-voz"),e.voz);setSeg($("#d-pausa"),e.pausa);setSeg($("#d-metas"),e.metas);
   $("#d-bueno").value=e.bueno||"";$("#d-sesion").value=e.sesion||"";$("#d-plan").value=e.plan||"";
   $("#hoy-estado").textContent=daily[k]?"Registro guardado":"Sin registrar";
   updateDayWA();
 }
 function dayFromForm(){return{animo,emociones:getChips($("#d-emociones")),otra:$("#d-otra").value.trim(),areas:getAreas(),
   malestar:getChips($("#d-malestar")),ansiedad:getSeg($("#d-ansiedad")),preocupacion:getSeg($("#d-preocupacion")),
-  voz:getSeg($("#d-voz")),pausa:getSeg($("#d-pausa")),bueno:$("#d-bueno").value.trim(),sesion:$("#d-sesion").value.trim(),plan:$("#d-plan").value.trim()}}
+  voz:getSeg($("#d-voz")),pausa:getSeg($("#d-pausa")),metas:getSeg($("#d-metas")),bueno:$("#d-bueno").value.trim(),sesion:$("#d-sesion").value.trim(),plan:$("#d-plan").value.trim()}}
 function dayText(){
   const e=dayFromForm(),emo=[...e.emociones,e.otra].filter(Boolean);
   const L=["*Registro diario · ¿Cómo anduve hoy?*",($("#d-nombre").value.trim()||"")&&`Nombre: ${$("#d-nombre").value.trim()}`,`Fecha: ${fmtLong(parse(dFecha.value))}`,"",
@@ -776,7 +783,7 @@ function dayText(){
     Object.keys(e.areas).length&&`3. Áreas (1 a 5): ${Object.entries(e.areas).map(([a,n])=>`${a} ${n}`).join(" · ")}`,
     e.malestar.length&&`4. Malestar corporal: ${e.malestar.join(", ")}`,
     (e.ansiedad||e.preocupacion)&&`5. Ansiedad o nervios: ${e.ansiedad||"—"} · Preocupado/a: ${e.preocupacion||"—"}`,
-    e.voz&&`6. Voz interior: ${e.voz}`,e.pausa&&`7. Pausa para estar presente: ${e.pausa}`,
+    e.voz&&`6. Voz interior: ${e.voz}`,e.pausa&&`7. Pausa para estar presente: ${e.pausa}`,e.metas&&`8. Pasos hacia mis metas: ${e.metas}`,
     e.bueno&&`\n*Algo bueno de hoy:* ${e.bueno}`,e.sesion&&`*Para contar en sesión:* ${e.sesion}`,e.plan&&`*Mini plan para mañana:* ${e.plan}`];
   return L.filter(x=>x!==false&&x!==""&&x!==0&&x!==undefined).join("\n");
 }
@@ -830,16 +837,16 @@ function loadWeek(){
 /* constantes y controles de la revisión semanal */
 const W_MOODS=MOODS.map(m=>({v:m.v,t:m.v===0?"No recuerdo":m.v===4?"Más o menos bien":m.t}));
 const wMoodName=v=>(W_MOODS.find(m=>m.v===v)||{t:"—"}).t;
-const W_EMOS=["Alegría o entusiasmo","Tranquilidad","Esperanza o motivación","Tristeza","Ansiedad o preocupación","Enojo o irritabilidad","Miedo","Culpa o vergüenza","Soledad","Frustración o impotencia","Otra"];
-const W_AREAS=["Sueño y descanso","Energía","Cuerpo y salud","Nutrición","Actividad física","Vínculos y afectos","Trabajo o estudio","Disfrute y tiempo para mí"];
-const W_MALESTAR=["Dolor de cabeza","Tensión o dolor muscular","Dolor de espalda o cuello","Molestias digestivas","Cansancio o agotamiento","Palpitaciones u opresión","Mareos o falta de aire","Otro malestar","Ninguno"];
+const W_EMOS=["Alegría o entusiasmo","Tranquilidad","Esperanza o motivación","Gratitud","Amor o ternura","Orgullo o satisfacción","Sorpresa","Tristeza","Ansiedad o preocupación","Angustia","Enojo o irritabilidad","Miedo","Culpa o vergüenza","Celos","Soledad","Frustración o impotencia","Aburrimiento o apatía","Confusión","Asco o rechazo","Otra"];
+const W_AREAS=["Sueño y descanso","Energía","Cuerpo y salud","Nutrición","Actividad física","Vínculos y afectos","Estudio","Trabajo","Espiritualidad y sentido","Disfrute y tiempo para mí"];
+const W_MALESTAR=["Dolor de cabeza","Tensión o dolor muscular","Dolor de espalda o cuello","Molestias digestivas","Cansancio o agotamiento","Palpitaciones","Opresión en el pecho","Dificultad para tragar","Cambios de temperatura (calor o frío)","Visión borrosa","Mareos","Falta de aire","Otro malestar","Ninguno"];
 const GAD=["Nunca","Varios días","Más de la mitad de los días","Casi todos los días"];
 const VEO=["Lo sigo sintiendo de la misma manera.","Ahora lo veo de otra forma.","Pude resolverlo o manejarlo.","Todavía no sé cómo interpretarlo.","Necesito hablarlo para entenderlo mejor."];
 const W_VOZ=[{t:"Con dureza",d:"Me exigí, me critiqué o me reproché mucho."},{t:"Mitad y mitad",d:"Hubo momentos duros y otros más amables."},{t:"Con amabilidad",d:"Me hablé con comprensión, como a alguien querido."}];
 const PRACTIQUE=["Notar mi voz crítica","Cambiar una frase dura","Hablarme como a un amigo/a","Reconocer algo que hice bien"];
 const DIAS_L=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
 // mapeo del registro diario a las opciones semanales
-const MAP_EMO={"Alegría":"Alegría o entusiasmo","Esperanza":"Esperanza o motivación","Enojo":"Enojo o irritabilidad","Culpa":"Culpa o vergüenza","Frustración":"Frustración o impotencia"};
+const MAP_EMO={"Alegría":"Alegría o entusiasmo","Esperanza":"Esperanza o motivación","Enojo":"Enojo o irritabilidad","Culpa":"Culpa o vergüenza","Vergüenza":"Culpa o vergüenza","Frustración":"Frustración o impotencia","Orgullo":"Orgullo o satisfacción","Ansiedad":"Ansiedad o preocupación","Aburrimiento":"Aburrimiento o apatía"};
 const MAP_AREA={"Disfrute y tiempo libre":"Disfrute y tiempo para mí"};
 
 $("#w-animos").innerHTML=DIAS_L.map((d,i)=>`<div class="daymood"><label for="w-dia-${i}">${d}</label><span class="disc" id="w-disc-${i}"></span>
@@ -876,7 +883,7 @@ $("#w-traer").onclick=()=>{
   setChips($("#w-emociones"),[...emo]);
   const cur=getScale($("#w-areas"),W_AREAS),acc={};days.forEach(e=>e&&Object.entries(e.areas||{}).forEach(([a,n])=>{a=MAP_AREA[a]||a;(acc[a]=acc[a]||[]).push(n)}));
   Object.entries(acc).forEach(([a,v])=>{if(!cur[a])cur[a]=Math.round(v.reduce((s,n)=>s+n,0)/v.length)});setScale($("#w-areas"),W_AREAS,cur);
-  const mal=new Set(getChips($("#w-malestar")));days.forEach(e=>e&&(e.malestar||[]).forEach(x=>mal.add(x)));
+  const mal=new Set(getChips($("#w-malestar")));days.forEach(e=>e&&(e.malestar||[]).forEach(x=>mal.add(x==="Palpitaciones u opresión"?"Palpitaciones":x)));
   if(mal.size>1)mal.delete("Ninguno");setChips($("#w-malestar"),[...mal]);
   $$("#w-presente .dotbtn").forEach((b,i)=>{const e=days[i];if(e&&(e.pausa==="Sí"||e.pausa==="Un poco"))b.setAttribute("aria-pressed","true")});
   updateWA();toast("Se completó con sus registros diarios. Puede revisarlo y cambiar lo que quiera.");
@@ -925,14 +932,14 @@ $("#sem-next").onclick=()=>{wk=addDays(wk,7);loadWeek()};
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function loadHist(){
   const today=new Date();const days=[...Array(14)].map((_,i)=>addDays(today,i-13));
-  $("#h-chart").innerHTML=days.map(d=>{const e=daily[iso(d)];const v=e?e.animo:0;return `<div class="bar" style="height:${v>0?v/6*100:4}%;background:${moodColor(v)}" title="${fmtShort(d)}: ${e?moodName(v):"sin registro"}"></div>`}).join("");
+  $("#h-chart").innerHTML=days.map(d=>{const e=daily[iso(d)];const v=e?e.animo:0;return `<div class="bar" style="height:${v>0?v/7*100:4}%;background:${moodColor(v)}" title="${fmtShort(d)}: ${e?moodName(v):"sin registro"}"></div>`}).join("");
   $("#h-x").innerHTML=days.map(d=>`<span>${d.getDate()}</span>`).join("");
   $("#h-legend").innerHTML=MOODS.filter(m=>m.v).map(m=>`<span><i style="background:${moodColor(m.v)}"></i>${m.t}</span>`).join("");
   const dk=Object.keys(daily).sort().reverse();
   $("#h-dias").innerHTML=dk.length?dk.map(k=>{const e=daily[k];const row=(t,v)=>v&&v.length?`<dt>${t}</dt><dd>${esc(Array.isArray(v)?v.join(", "):v)}</dd>`:"";
     const emo=[...(e.emociones||[]),e.otra].filter(Boolean);const ar=Object.entries(e.areas||{}).map(([a,n])=>`${a} ${n}`);
     return `<details class="entry"><summary><span class="disc" style="background:${moodColor(e.animo)}"></span><span style="flex:1">${fmtLong(parse(k))}</span><span class="small muted">${moodName(e.animo)}</span></summary>
-    <div class="body"><dl style="margin:0">${row("Emociones",emo)}${row("Áreas (1 a 5)",ar.join(" · "))}${row("Malestar corporal",e.malestar)}${row("Ansiedad o nervios",e.ansiedad)}${row("Preocupación",e.preocupacion)}${row("Voz interior",e.voz)}${row("Pausa presente",e.pausa)}${row("Algo bueno de hoy",e.bueno)}${row("Para contar en sesión",e.sesion)}${row("Mini plan para mañana",e.plan)}</dl>
+    <div class="body"><dl style="margin:0">${row("Emociones",emo)}${row("Áreas (1 a 5)",ar.join(" · "))}${row("Malestar corporal",e.malestar)}${row("Ansiedad o nervios",e.ansiedad)}${row("Preocupación",e.preocupacion)}${row("Voz interior",e.voz)}${row("Pausa presente",e.pausa)}${row("Pasos hacia mis metas",e.metas)}${row("Algo bueno de hoy",e.bueno)}${row("Para contar en sesión",e.sesion)}${row("Mini plan para mañana",e.plan)}</dl>
     <button class="linkbtn" data-edit="${k}">Editar este día</button></div></details>`}).join("")
     :`<div class="empty">Todavía no hay registros. Empiece hoy desde la pestaña <b>Hoy</b>: le lleva un par de minutos.</div>`;
   const wkKeys=Object.keys(weekly).sort().reverse();
@@ -963,7 +970,7 @@ let caption="";
 function wrapLines(ctx,text,maxW){const w=text.split(" "),L=[];let line="";
   w.forEach(word=>{const t=line?line+" "+word:word;if(ctx.measureText(t).width>maxW&&line){L.push(line);line=word}else line=t});if(line)L.push(line);return L}
 async function makeImage(f){
-  try{await document.fonts.load('italic 500 60px "Newsreader"');await document.fonts.load('600 30px "Figtree"')}catch(e){}
+  try{await document.fonts.load('italic 500 60px "Newsreader"');await document.fonts.load('400 40px "Gloock"');await document.fonts.load('600 30px "Figtree"')}catch(e){}
   const W=1080,H=1350,cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");
   const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#1f4955");g.addColorStop(1,"#244f5c");x.fillStyle=g;x.fillRect(0,0,W,H);
   // ilustración de la frase
@@ -981,8 +988,8 @@ async function makeImage(f){
   const aO=Math.acos(-13/151),aI=Math.acos(-13/102),bO=Math.acos(13/151),bI=Math.acos(13/102);
   x.fillStyle="#f2ebdb";x.beginPath();el(151,135,-aO,aO,true);el(102,116,aI,-aI,false);x.closePath();x.fill();
   x.fillStyle="#d9906f";x.beginPath();el(151,135,-bO,bO,false);el(102,116,bI,-bI,true);x.closePath();x.fill();
-  x.beginPath();x.arc(lc[0],lc[1],25*ls,0,7);x.fill();
-  x.font='italic 500 40px "Newsreader", Georgia, serif';x.fillStyle="#f2ebdb";x.fillText("Entre Nosotros",W/2,H-120);
+  x.fillStyle="#e3b866";x.beginPath();x.arc(lc[0],lc[1],25*ls,0,7);x.fill();
+  x.font='400 40px "Gloock", Georgia, serif';x.fillStyle="#f2ebdb";x.fillText("Entre Nosotros",W/2,H-120);
   x.font='500 26px "Figtree", sans-serif';x.fillStyle="#c9d3d3";x.fillText("@entrenosotros.psicoterapia · Lic. Eric Terlecki",W/2,H-78);
   $("#m-img").src=cv.toDataURL("image/png");
   shareFile=null;cv.toBlob(b=>{if(!b)return;try{const f=new File([b],"entre-nosotros-frase.png",{type:"image/png"});
