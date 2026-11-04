@@ -254,6 +254,28 @@ dl.kv dd{margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;
 .modal .box{background:var(--surface);border-radius:var(--r);padding:18px;max-width:440px;width:100%;display:grid;gap:12px;max-height:100%;overflow:auto}
 .modal img{border-radius:10px;border:1px solid var(--line);width:100%}
 
+/* instalar, confidencialidad, instagram */
+.install{background:var(--head-bg);color:var(--head-fg);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px}
+.install h3{color:var(--head-fg)}
+.install p{font-size:.9rem;color:color-mix(in srgb,var(--head-fg) 82%,transparent)}
+.install ol{margin:0;padding-left:1.2em;display:grid;gap:4px;font-size:.9rem}
+.install .row .btn{flex:0 1 auto}
+.install .btn{background:var(--logo-b);color:#1f2f33}
+.install .btn.ghost{background:transparent;color:var(--head-fg);border-color:color-mix(in srgb,var(--head-fg) 40%,transparent)}
+.ico{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em}
+.privacy{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--muted);background:var(--sunk);border-radius:12px;padding:10px 12px}
+.privacy svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--brand)}
+.privacy a{color:var(--brand);font-weight:600}
+#conf,details.guide{scroll-margin-top:calc(84px + env(safe-area-inset-top,0px))}
+.conf ul{margin:0;padding-left:1.2em;display:grid;gap:6px;font-size:.93rem}
+.ig-card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.ig-badge{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--logo-c),var(--logo-b) 55%,#b35a33);color:#fff}
+.ig-badge svg{width:28px;height:28px}
+.sos-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.sos-list li{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:baseline}
+.sos-list b{font-family:var(--display);font-weight:400;font-size:1.35rem;color:var(--dot-ink);grid-row:span 2;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sos-list span{font-weight:600;font-size:.92rem}
+.sos-list small{color:var(--muted);font-size:.82rem;grid-column:2}
 footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
@@ -288,6 +310,16 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
         <h2 id="hoy-saludo">¿Cómo anduve hoy?</h2>
         <p class="muted">Registro diario. Complételo a su ritmo; casi todo se responde tocando una opción.</p>
       </div>
+      <div class="install" id="install-card" hidden>
+        <h3>Tenga la app a mano en su celular</h3>
+        <p>Instálela en la pantalla de inicio: se abre como cualquier aplicación, sin buscarla en el navegador, y funciona sin conexión.</p>
+        <div id="install-steps">
+          <div class="inst-ios"><b>En iPhone (Safari)</b><ol><li>Toque el botón Compartir <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Compartir"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> en la barra de abajo.</li><li>Elija <b>«Agregar a inicio»</b> y luego <b>«Agregar»</b>.</li></ol></div>
+          <div class="inst-android"><b>En Android (Chrome)</b><ol><li>Toque el menú <b>⋮</b> arriba a la derecha.</li><li>Elija <b>«Instalar aplicación»</b> o <b>«Agregar a la pantalla principal»</b>.</li></ol></div>
+        </div>
+        <div class="row"><button class="btn" id="install-btn" type="button" hidden>Instalar la app</button><button class="btn ghost" id="install-later" type="button">Ahora no</button></div>
+      </div>
+      <p class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Lo que registra queda guardado sólo en este celular. Nadie más puede verlo, salvo lo que usted decida enviarme. <a href="#profesional" data-goto="conf">Sobre la confidencialidad</a></span></p>
       <div class="card">
         <div class="q"><label for="d-nombre">Nombre o iniciales</label><input type="text" id="d-nombre" placeholder="Por ejemplo: M. G."></div>
         <div class="datebar">
@@ -349,6 +381,14 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
         <a class="btn ghost" id="d-wa" href="#" target="_blank" rel="noopener">Enviar por WhatsApp</a>
       </div>
       <p class="closing">Gracias por darse este momento. Complételo a su ritmo: con lo que pueda, alcanza.</p>
+      <div class="card ig-card">
+        <span class="ig-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <div style="display:grid;gap:6px">
+          <h3>Compartir en Instagram</h3>
+          <p class="small muted">Cree una imagen para sus historias que diga que hoy se tomó un momento para usted. No incluye nada de lo que registró.</p>
+          <div class="row"><button class="btn ghost" id="d-ig" type="button">Crear imagen para Instagram</button></div>
+        </div>
+      </div>
     </section>
 
     <!-- SEMANA -->
@@ -518,6 +558,16 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
         </div>
       </details>
 
+      <details class="guide" id="guia-instalar">
+        <summary>Instalar la app en el celular</summary>
+        <div class="body">
+          <p>Así la tiene en la pantalla de inicio, con el logo de Entre Nosotros, y se abre aunque no tenga conexión.</p>
+          <div class="inst-ios"><b>En iPhone (Safari)</b><ol><li>Toque el botón Compartir <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Compartir"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg> en la barra de abajo.</li><li>Elija <b>«Agregar a inicio»</b> y luego <b>«Agregar»</b>.</li></ol></div>
+          <div class="inst-android"><b>En Android (Chrome)</b><ol><li>Toque el menú <b>⋮</b> arriba a la derecha.</li><li>Elija <b>«Instalar aplicación»</b> o <b>«Agregar a la pantalla principal»</b>.</li></ol></div>
+          <p class="small muted">Si ya la instaló, se actualiza sola cada vez que la abre con internet.</p>
+        </div>
+      </details>
+
       <details class="guide">
         <summary>Vivir el presente</summary>
         <div class="body">
@@ -584,7 +634,12 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
 
       <div class="alert">
         <h3>Si está atravesando una urgencia</h3>
-        <p>Esta aplicación no reemplaza la atención inmediata. Ante una emergencia en Argentina, llame al <b>107</b> (emergencias médicas) o al <b>911</b>, o acuda a la guardia más cercana. También puede escribirme por WhatsApp.</p>
+        <p>Esta aplicación no reemplaza la atención inmediata. Ante una emergencia, llame o acuda a la guardia más cercana:</p>
+        <ul class="sos-list">
+          <li><b>911</b><span>Emergencias</span><small>Policía, bomberos y urgencias en general.</small></li>
+          <li><b>107</b><span>SIES · Emergencias médicas</span><small>Ambulancia y urgencias de salud en la provincia de Santa Fe.</small></li>
+          <li><b>0800-999-0091</b><span>Línea Nacional de Salud Mental</span><small>Orientación y apoyo en la urgencia. Gratuita, las 24 horas, en todo el país.</small></li>
+        </ul>
       </div>
     </section>
 
@@ -613,8 +668,38 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
           <dt>WhatsApp</dt><dd><span>341 660-1847</span><button class="copy" data-copy="3416601847">Copiar</button><a class="copy" href="https://wa.me/5493416601847" target="_blank" rel="noopener" style="text-decoration:none">Escribir</a></dd>
           <dt>Correo</dt><dd><span>ericterlecki@gmail.com</span><button class="copy" data-copy="ericterlecki@gmail.com">Copiar</button></dd>
           <dt>Consultorio</dt><dd><span>Rizzuto 3451, Rosario</span><a class="copy" href="https://www.google.com/maps/search/?api=1&query=Rizzuto+3451+Rosario+Santa+Fe" target="_blank" rel="noopener" style="text-decoration:none">Mapa</a></dd>
-          <dt>Instagram</dt><dd><a href="https://www.instagram.com/entrenosotros.psicoterapia/" target="_blank" rel="noopener" style="color:var(--brand);font-weight:600">@entrenosotros.psicoterapia</a></dd>
+          <dt>Instagram</dt><dd><span>@entrenosotros.psicoterapia</span><a class="copy" href="https://www.instagram.com/entrenosotros.psicoterapia/" target="_blank" rel="noopener" style="text-decoration:none">Ver perfil</a></dd>
+          <dt>Horarios</dt><dd><span>Lunes a viernes de 8 a 21 h · Sábados de 8 a 13 h</span></dd>
+          <dt>Modalidad</dt><dd><span>Presencial en Pasaje Rizzuto 3451 (Uruguay al 1150) o virtual por Meet</span></dd>
+          <dt>Sesiones</dt><dd><span>Una hora aprox., semanales o quincenales</span></dd>
         </dl>
+        <div class="row"><a class="btn" href="https://wa.me/5493416601847?text=Hola%20Eric%2C%20quisiera%20consultar%20por%20un%20turno." target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
+      </div>
+
+      <div class="card ig-card">
+        <span class="ig-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <div style="display:grid;gap:6px">
+          <h3>Entre Nosotros en Instagram</h3>
+          <p class="small muted">Psicoeducación, frases y recursos para el día a día.</p>
+          <div class="row"><a class="btn ghost" href="https://www.instagram.com/entrenosotros.psicoterapia/" target="_blank" rel="noopener">Seguir a @entrenosotros.psicoterapia</a></div>
+        </div>
+      </div>
+
+      <div class="card conf" id="conf">
+        <h3>Confidencialidad</h3>
+        <ul>
+          <li><b>Sus registros quedan sólo en este celular.</b> La app no los envía a ningún servidor ni a ninguna base de datos. Tampoco yo puedo verlos.</li>
+          <li><b>Sólo me llega lo que usted decide enviar</b>, cuando toca «Enviar por WhatsApp». Ese mensaje queda también en su chat de WhatsApp.</li>
+          <li><b>Lo que comparte conmigo está protegido por el secreto profesional</b>, igual que lo que conversamos en sesión.</li>
+          <li><b>Las imágenes para Instagram no incluyen datos de sus registros.</b> Sólo muestran una frase o un mensaje general.</li>
+          <li>Si otra persona usa su celular, podría abrir la app. Puede borrar sus datos cuando quiera desde <a href="#ajustes" style="color:var(--brand);font-weight:600">Ajustes</a>.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Recomendar la app</h3>
+        <p class="small muted">Si a alguien de su confianza le puede servir, compártale el enlace. Para usarla dentro de un proceso terapéutico, puede escribirme.</p>
+        <div class="row"><button class="btn ghost" id="p-share" type="button">Compartir el enlace</button></div>
       </div>
       <p class="small muted">Los materiales de esta aplicación son recursos para usar dentro de un proceso psicológico clínico profesional. No constituyen un tratamiento en sí mismos.</p>
     </section>
@@ -622,6 +707,11 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
     <!-- AJUSTES -->
     <section class="view" id="v-ajustes" hidden>
       <div class="lead"><h2>Ajustes</h2><p class="muted">Todo se guarda sólo en este dispositivo.</p></div>
+      <div class="card">
+        <h3>Instalar en el celular</h3>
+        <p class="small muted">Tenga la app en la pantalla de inicio, con el logo de Entre Nosotros.</p>
+        <div class="row"><button class="btn" id="a-install" type="button">Instalar la app</button><a class="btn ghost" href="#guia" data-goto="guia-instalar">Ver los pasos</a></div>
+      </div>
       <div class="card">
         <div class="q"><label for="a-nombre">Mi nombre <span class="hint">· aparece en el resumen que envía</span></label>
           <input type="text" id="a-nombre" placeholder="Nombre y apellido"></div>
@@ -662,8 +752,8 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
   <div class="box">
     <h3>Imagen para Instagram</h3>
     <img id="m-img" alt="Frase con el logo de Entre Nosotros">
-    <p class="small muted">Toque «Compartir imagen» para enviarla directo a Instagram, o mantenga presionada la imagen para guardarla en su galería.</p>
-    <div class="row"><button class="btn" id="m-share" hidden>Compartir imagen</button><button class="btn ghost" id="m-caption">Copiar texto de la publicación</button><button class="btn ghost" id="m-cerrar">Cerrar</button></div>
+    <p class="small muted">Toque «Compartir en Instagram» y elija Instagram (historia o publicación). El texto queda copiado para pegarlo. Si no aparece el botón, mantenga presionada la imagen para guardarla en su galería y súbala desde Instagram.</p>
+    <div class="row"><button class="btn" id="m-share" hidden>Compartir en Instagram</button><button class="btn ghost" id="m-caption">Copiar texto de la publicación</button><button class="btn ghost" id="m-cerrar">Cerrar</button></div>
   </div>
 </div>
 
@@ -963,7 +1053,7 @@ function loadFrases(){
   $$("#f-cats .chip").forEach(b=>b.onclick=()=>{cat=b.dataset.cat;loadFrases()});
   $("#f-list").innerHTML=FRASES.map((f,i)=>({f,i})).filter(x=>cat==="Todas"||x.f.c===cat).map(({f,i})=>
     `<figure class="quote" style="margin:0"><div class="qtop"><span class="tag">${f.c}</span>${ILL[f.a]?`<span class="ill" aria-hidden="true">${illSvg(f.a)}</span>`:""}</div><blockquote>“${f.t}”</blockquote>
-     <div class="meta"><cite>— ${f.a}</cite><button class="linkbtn" data-img="${i}">Crear imagen</button></div></figure>`).join("");
+     <div class="meta"><cite>— ${f.a}</cite><button class="linkbtn" data-img="${i}">Compartir en Instagram</button></div></figure>`).join("");
   $$("[data-img]").forEach(b=>b.onclick=()=>makeImage(FRASES[+b.dataset.img]));
 }
 let caption="";
@@ -998,6 +1088,37 @@ async function makeImage(f){
   caption=`“${f.t}” — ${f.a}\n\n#${f.c.replace(/\s/g,"")} #psicoterapia #saludmental #EntreNosotros #Rosario`;
   $("#modal").hidden=false;
 }
+async function makeDayImage(){
+  try{await document.fonts.load('italic 500 60px "Newsreader"');await document.fonts.load('400 40px "Gloock"');await document.fonts.load('600 30px "Figtree"')}catch(e){}
+  const W=1080,H=1920,cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#1f4955");g.addColorStop(1,"#163842");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.fillStyle="rgba(242,235,219,.06)";x.beginPath();x.arc(W/2,560,300,0,7);x.fill();
+  drawLogo(x,W/2,560,0.95);
+  x.textAlign="center";x.fillStyle="#d9906f";x.font='600 30px "Figtree", sans-serif';
+  x.fillText("H O Y   M E   D I   U N   M O M E N T O",W/2,1000);
+  x.fillStyle="#f2ebdb";x.font='400 92px "Gloock", Georgia, serif';
+  ["Me tomé un","momento para mí."].forEach((l,i)=>x.fillText(l,W/2,1130+i*110));
+  const n=[...Array(7)].map((_,i)=>daily[iso(addDays(monday(new Date()),i))]).filter(Boolean).length;
+  x.font='italic 500 50px "Newsreader", Georgia, serif';x.fillStyle="#e3b866";
+  x.fillText(n>1?`${n} días registrados esta semana`:"Registrar cómo estoy también es cuidarme",W/2,1420);
+  x.font='400 44px "Gloock", Georgia, serif';x.fillStyle="#f2ebdb";x.fillText("Entre Nosotros",W/2,H-190);
+  x.font='500 30px "Figtree", sans-serif';x.fillStyle="#c9d3d3";x.fillText("@entrenosotros.psicoterapia",W/2,H-140);
+  showImage(cv,"entre-nosotros-mi-momento.png",`Hoy me tomé un momento para mí. 🌿\n\n@entrenosotros.psicoterapia #saludmental #autocuidado #EntreNosotros`);
+}
+function drawLogo(x,cx,cy,ls){
+  const el=(rx,ry,a0,a1,ccw)=>x.ellipse(cx,cy,rx*ls,ry*ls,0,a0,a1,ccw);
+  const aO=Math.acos(-13/151),aI=Math.acos(-13/102),bO=Math.acos(13/151),bI=Math.acos(13/102);
+  x.fillStyle="#f2ebdb";x.beginPath();el(151,135,-aO,aO,true);el(102,116,aI,-aI,false);x.closePath();x.fill();
+  x.fillStyle="#d9906f";x.beginPath();el(151,135,-bO,bO,false);el(102,116,bI,-bI,true);x.closePath();x.fill();
+  x.fillStyle="#e3b866";x.beginPath();x.arc(cx,cy,25*ls,0,7);x.fill();
+}
+function showImage(cv,name,text){
+  $("#m-img").src=cv.toDataURL("image/png");$("#m-share").hidden=true;shareFile=null;
+  cv.toBlob(b=>{if(!b)return;try{const f=new File([b],name,{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){shareFile=f;$("#m-share").hidden=false}}catch(e){}},"image/png");
+  caption=text;$("#modal").hidden=false;
+}
+$("#d-ig").onclick=()=>makeDayImage();
 $("#m-cerrar").onclick=()=>$("#modal").hidden=true;
 let shareFile=null;
 $("#m-share").onclick=async()=>{if(!shareFile)return;try{await copy(caption,"Texto copiado: péguelo en la publicación");await navigator.share({files:[shareFile]})}
@@ -1026,6 +1147,35 @@ $("#a-import-btn").onclick=()=>{try{const d=JSON.parse($("#a-import").value);if(
 $("#a-borrar").onclick=()=>{$("#a-confirm").hidden=false;$("#a-borrar").hidden=true};
 $("#a-borrar-no").onclick=()=>{$("#a-confirm").hidden=true;$("#a-borrar").hidden=false};
 $("#a-borrar-si").onclick=()=>{daily={};weekly={};store.set("daily",daily);store.set("weekly",weekly);$("#a-confirm").hidden=true;$("#a-borrar").hidden=false;toast("Registros borrados");loadDay()};
+
+/* ---------- instalar en el celular ---------- */
+const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const ua=navigator.userAgent,isIOS=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),isAndroid=/android/i.test(ua);
+let deferred=null;
+function installUI(){
+  const hide=standalone||store.get("installLater",0)>Date.now();
+  $("#install-card").hidden=hide||!(isIOS||isAndroid||deferred);
+  $("#install-btn").hidden=!deferred;
+  $$(".inst-ios").forEach(e=>e.hidden=!!deferred||(isAndroid&&!isIOS));
+  $$(".inst-android").forEach(e=>e.hidden=!!deferred||(isIOS&&!isAndroid));
+  if(!isIOS&&!isAndroid&&!deferred){$$(".inst-ios,.inst-android").forEach(e=>e.hidden=false)}
+  $("#a-install").textContent=standalone?"La app ya está instalada":"Instalar la app";$("#a-install").disabled=standalone;
+}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;installUI()});
+addEventListener("appinstalled",()=>{deferred=null;toast("¡Listo! La app quedó en su pantalla de inicio");$("#install-card").hidden=true});
+async function doInstall(){
+  if(deferred){deferred.prompt();try{await deferred.userChoice}catch(e){}deferred=null;installUI();return}
+  location.hash="#guia";setTimeout(()=>{const d=$("#guia-instalar");if(d){d.open=true;d.scrollIntoView({block:"start"})}},60);
+}
+$("#install-btn").onclick=doInstall;$("#a-install").onclick=doInstall;
+$("#install-later").onclick=()=>{store.set("installLater",Date.now()+7*864e5);$("#install-card").hidden=true};
+installUI();
+document.addEventListener("click",e=>{const a=e.target.closest("[data-goto]");if(!a)return;const id=a.dataset.goto;
+  setTimeout(()=>{const t=document.getElementById(id);if(!t)return;if(t.tagName==="DETAILS")t.open=true;t.scrollIntoView({block:"start"})},60)});
+$("#p-share").onclick=async()=>{const url=location.origin+location.pathname;
+  const data={title:"Entre Nosotros · Mi registro",text:"Una app para registrar cómo estoy, del Lic. Eric Terlecki.",url};
+  try{if(navigator.share){await navigator.share(data);return}}catch(e){if(e&&e.name==="AbortError")return}
+  copy(url,"Enlace copiado")};
 
 /* ---------- navegación ---------- */
 const VIEWS=["hoy","semana","historial","frases","guia","profesional","ajustes"];
