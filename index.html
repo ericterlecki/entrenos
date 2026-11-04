@@ -263,6 +263,7 @@ dl.kv dd{margin:0;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;
 .install .btn{background:var(--logo-b);color:#1f2f33}
 .install .btn.ghost{background:transparent;color:var(--head-fg);border-color:color-mix(in srgb,var(--head-fg) 40%,transparent)}
 .ico{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em}
+.inst-ios + .inst-android,.inst-android + .inst-ios{margin-top:18px}
 .privacy{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:var(--muted);background:var(--sunk);border-radius:12px;padding:10px 12px}
 .privacy svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--brand)}
 .privacy a{color:var(--brand);font-weight:600}
@@ -1156,9 +1157,9 @@ function installUI(){
   const hide=standalone||store.get("installLater",0)>Date.now();
   $("#install-card").hidden=hide||!(isIOS||isAndroid||deferred);
   $("#install-btn").hidden=!deferred;
-  $$("#install-steps .inst-ios").forEach(e=>e.hidden=!!deferred||(isAndroid&&!isIOS));
-  $$("#install-steps .inst-android").forEach(e=>e.hidden=!!deferred||(isIOS&&!isAndroid));
-  if(!isIOS&&!isAndroid&&!deferred){$$("#install-steps .inst-ios,#install-steps .inst-android").forEach(e=>e.hidden=false)}
+  // Siempre se ven los pasos de iPhone y de Android; primero los del propio celular
+  $$(".inst-ios,.inst-android").forEach(e=>e.hidden=false);
+  if(isAndroid&&!isIOS){$$(".inst-android").forEach(a=>{const i=a.parentElement.querySelector(".inst-ios");if(i)a.parentElement.insertBefore(a,i)})}
   $("#a-install").textContent=standalone?"La app ya está instalada":"Instalar la app";$("#a-install").disabled=standalone;
 }
 addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;installUI()});
