@@ -372,8 +372,15 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
       </div>
 
       <div class="card">
-        <div class="q"><label for="d-bueno">Algo bueno de hoy</label><textarea id="d-bueno" rows="2"></textarea></div>
-        <div class="q"><label for="d-sesion">Para contar en sesión</label><textarea id="d-sesion" rows="2"></textarea></div>
+        <div class="qn"><span class="num">9</span><span class="txt">Lo que me sostuvo hoy<span class="hint">No hace falta completar todo: con una línea alcanza.</span></span></div>
+        <div class="q"><span class="label">Hoy me cuidé…</span><div class="chips" id="d-cuidados"></div></div>
+        <div class="q"><label for="d-bueno">Algo que agradezco o un pequeño logro de hoy</label><textarea id="d-bueno" rows="2" placeholder="Aunque sea mínimo."></textarea></div>
+        <div class="q"><label for="d-sentido">Un encuentro o un gesto que me hizo bien o me dio sentido</label><textarea id="d-sentido" rows="2" placeholder="Con alguien, hacia alguien, o algo que viví de acuerdo con lo que valoro."></textarea></div>
+      </div>
+
+      <div class="card">
+        <div class="qn"><span class="num">10</span><span class="txt">Para cerrar el día</span></div>
+        <div class="q"><label for="d-sesion">Para traer a la sesión</label><textarea id="d-sesion" rows="2" placeholder="Algo que quiero conversar."></textarea></div>
         <div class="q"><label for="d-plan">Mini plan o proyecto para mañana</label><textarea id="d-plan" rows="2"></textarea></div>
       </div>
 
@@ -413,6 +420,7 @@ footer.sig{padding-block:26px 6px;text-align:center;font-size:.8rem;color:var(--
         </div>
         <div class="week-strip" id="sem-strip"></div>
         <div class="stats" id="sem-stats"></div>
+        <p class="small muted" id="sem-cuidados" hidden></p>
         <button class="btn ghost" id="w-traer">Traer mis registros diarios a esta revisión</button>
       </div>
 
@@ -771,6 +779,7 @@ const NIVEL=["Nada","Poco","Bastante","Mucho"];
 const VOZ=["Con dureza","Mitad y mitad","Con amabilidad"];
 const PAUSA=["Sí","Un poco","No"];
 const METAS=["Nada","Algo","Mucho"];
+const CUIDADOS=["Descansando","Comiendo con tranquilidad","Moviéndome o caminando","Con un rato para mí","Pidiendo o aceptando ayuda","Poniendo un límite","Con un momento de oración o silencio"];
 const DIAS=["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
 const FRASES=[
  {c:"Resiliencia",t:"Cuando ya no somos capaces de cambiar una situación, nos encontramos ante el desafío de cambiarnos a nosotros mismos.",a:"Viktor Frankl"},
@@ -826,7 +835,7 @@ const animoEl=$("#d-animo");let animo=null;
 MOODS.forEach(m=>{const b=document.createElement("button");b.type="button";b.className="mood";b.setAttribute("aria-pressed","false");
   b.innerHTML=m.v?`<span class="disc" style="background:${moodColor(m.v)}"></span>${m.t}`:`<span class="disc q">?</span>${m.t}`;b.dataset.v=m.v;
   b.onclick=()=>{animo=m.v;animoEl.querySelectorAll(".mood").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));updateDayWA()};animoEl.appendChild(b)});
-chipGroup($("#d-emociones"),EMOS,true);chipGroup($("#d-malestar"),MALESTAR,true);
+chipGroup($("#d-emociones"),EMOS,true);chipGroup($("#d-malestar"),MALESTAR,true);chipGroup($("#d-cuidados"),CUIDADOS,true);
 function segGroup(el,opts,cb=()=>updateDayWA()){el.innerHTML="";opts.forEach(o=>{const b=document.createElement("button");b.type="button";b.textContent=o;b.setAttribute("aria-pressed","false");
   b.onclick=()=>{const on=b.getAttribute("aria-pressed")==="true";el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed",on?"false":"true");cb()};el.appendChild(b)})}
 const getSeg=el=>(el.querySelector('[aria-pressed="true"]')||{}).textContent||"";
@@ -860,13 +869,14 @@ function loadDay(){
   setChips($("#d-emociones"),e.emociones);$("#d-otra").value=e.otra||"";
   setAreas(e.areas);setChips($("#d-malestar"),e.malestar);
   setSeg($("#d-ansiedad"),e.ansiedad);setSeg($("#d-preocupacion"),e.preocupacion);setSeg($("#d-voz"),e.voz);setSeg($("#d-pausa"),e.pausa);setSeg($("#d-metas"),e.metas);
-  $("#d-bueno").value=e.bueno||"";$("#d-sesion").value=e.sesion||"";$("#d-plan").value=e.plan||"";
+  setChips($("#d-cuidados"),e.cuidados);
+  $("#d-bueno").value=e.bueno||"";$("#d-sentido").value=e.sentido||"";$("#d-sesion").value=e.sesion||"";$("#d-plan").value=e.plan||"";
   $("#hoy-estado").textContent=daily[k]?"Registro guardado":"Sin registrar";
   updateDayWA();
 }
 function dayFromForm(){return{animo,emociones:getChips($("#d-emociones")),otra:$("#d-otra").value.trim(),areas:getAreas(),
   malestar:getChips($("#d-malestar")),ansiedad:getSeg($("#d-ansiedad")),preocupacion:getSeg($("#d-preocupacion")),
-  voz:getSeg($("#d-voz")),pausa:getSeg($("#d-pausa")),metas:getSeg($("#d-metas")),bueno:$("#d-bueno").value.trim(),sesion:$("#d-sesion").value.trim(),plan:$("#d-plan").value.trim()}}
+  voz:getSeg($("#d-voz")),pausa:getSeg($("#d-pausa")),metas:getSeg($("#d-metas")),cuidados:getChips($("#d-cuidados")),bueno:$("#d-bueno").value.trim(),sentido:$("#d-sentido").value.trim(),sesion:$("#d-sesion").value.trim(),plan:$("#d-plan").value.trim()}}
 function dayText(){
   const e=dayFromForm(),emo=[...e.emociones,e.otra].filter(Boolean);
   const L=["*Registro diario · ¿Cómo anduve hoy?*",($("#d-nombre").value.trim()||"")&&`Nombre: ${$("#d-nombre").value.trim()}`,`Fecha: ${fmtLong(parse(dFecha.value))}`,"",
@@ -875,7 +885,8 @@ function dayText(){
     e.malestar.length&&`4. Malestar corporal: ${e.malestar.join(", ")}`,
     (e.ansiedad||e.preocupacion)&&`5. Ansiedad o nervios: ${e.ansiedad||"—"} · Preocupado/a: ${e.preocupacion||"—"}`,
     e.voz&&`6. Voz interior: ${e.voz}`,e.pausa&&`7. Pausa para estar presente: ${e.pausa}`,e.metas&&`8. Pasos hacia mis metas: ${e.metas}`,
-    e.bueno&&`\n*Algo bueno de hoy:* ${e.bueno}`,e.sesion&&`*Para contar en sesión:* ${e.sesion}`,e.plan&&`*Mini plan para mañana:* ${e.plan}`];
+    e.cuidados.length&&`9. Me cuidé: ${e.cuidados.join(", ").toLowerCase()}`,
+    e.bueno&&`\n*Agradezco o logré:* ${e.bueno}`,e.sentido&&`*Me hizo bien o me dio sentido:* ${e.sentido}`,e.sesion&&`*Para traer a la sesión:* ${e.sesion}`,e.plan&&`*Mini plan para mañana:* ${e.plan}`];
   return L.filter(x=>x!==false&&x!==""&&x!==0&&x!==undefined).join("\n");
 }
 function updateDayWA(){$("#d-wa").href="https://wa.me/"+WA+"?text="+encodeURIComponent(dayText())}
@@ -901,7 +912,9 @@ function weekStats(start){
   const ar={};ds.forEach(e=>Object.entries(e.areas||{}).forEach(([a,n])=>{(ar[a]=ar[a]||[]).push(n)}));
   const areas=AREAS.filter(a=>ar[a]).map(a=>[a,(ar[a].reduce((s,n)=>s+n,0)/ar[a].length)]);
   const sesion=[...Array(7)].map((_,i)=>{const e=daily[iso(addDays(start,i))];return e&&e.sesion?`${DIAS[i]}: ${e.sesion}`:""}).filter(Boolean);
-  return{n:ds.length,avg,top,areas,sesion};
+  const cc={};ds.forEach(e=>(e.cuidados||[]).forEach(x=>cc[x]=(cc[x]||0)+1));
+  const cuidados=Object.entries(cc).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>x[0].toLowerCase());
+  return{n:ds.length,avg,top,areas,sesion,cuidados};
 }
 function loadWeek(){
   const k=iso(wk),end=addDays(wk,6);
@@ -913,6 +926,7 @@ function loadWeek(){
   $("#sem-stats").innerHTML=`<div class="stat"><b>${s.n}/7</b><span>días registrados</span></div>
    <div class="stat"><b style="font-size:1.05rem">${s.avg?moodName(Math.round(s.avg)):"—"}</b><span>ánimo promedio</span></div>
    <div class="stat"><b style="font-size:.95rem;font-family:var(--body)">${s.top.join(", ")||"—"}</b><span>emociones frecuentes</span></div>`;
+  const sc=$("#sem-cuidados");sc.hidden=!s.cuidados.length;sc.textContent=s.cuidados.length?"Esta semana me cuidé sobre todo: "+s.cuidados.join(", ")+".":"";
   const w=weekly[k]||{};
   $("#w-nombre").value=prefs.nombre||"";$("#w-proxima").value=w.proxima||"";
   setDayMoods(w.animos);setChips($("#w-emociones"),w.emociones);$("#w-otra").value=w.otra||"";
@@ -977,6 +991,10 @@ $("#w-traer").onclick=()=>{
   const mal=new Set(getChips($("#w-malestar")));days.forEach(e=>e&&(e.malestar||[]).forEach(x=>mal.add(x==="Palpitaciones u opresión"?"Palpitaciones":x)));
   if(mal.size>1)mal.delete("Ninguno");setChips($("#w-malestar"),[...mal]);
   $$("#w-presente .dotbtn").forEach((b,i)=>{const e=days[i];if(e&&(e.pausa==="Sí"||e.pausa==="Un poco"))b.setAttribute("aria-pressed","true")});
+  // lo escrito cada día alimenta las preguntas 9 y 10 (sólo si están vacías), sin volver a preguntarlo
+  const lines=f=>days.map((e,i)=>e&&e[f]?`${DIAS[i]}: ${e[f]}`:"").filter(Boolean);
+  if(!$("#w-sesion").value.trim()){const l=lines("sesion");if(l.length)$("#w-sesion").value=l.join("\n")}
+  if(!$("#w-reconocer").value.trim()){const l=[...lines("bueno"),...lines("sentido")];if(l.length)$("#w-reconocer").value=l.join("\n")}
   updateWA();toast("Se completó con sus registros diarios. Puede revisarlo y cambiar lo que quiera.");
 };
 
@@ -1030,7 +1048,7 @@ function loadHist(){
   $("#h-dias").innerHTML=dk.length?dk.map(k=>{const e=daily[k];const row=(t,v)=>v&&v.length?`<dt>${t}</dt><dd>${esc(Array.isArray(v)?v.join(", "):v)}</dd>`:"";
     const emo=[...(e.emociones||[]),e.otra].filter(Boolean);const ar=Object.entries(e.areas||{}).map(([a,n])=>`${a} ${n}`);
     return `<details class="entry"><summary><span class="disc" style="background:${moodColor(e.animo)}"></span><span style="flex:1">${fmtLong(parse(k))}</span><span class="small muted">${moodName(e.animo)}</span></summary>
-    <div class="body"><dl style="margin:0">${row("Emociones",emo)}${row("Áreas (1 a 5)",ar.join(" · "))}${row("Malestar corporal",e.malestar)}${row("Ansiedad o nervios",e.ansiedad)}${row("Preocupación",e.preocupacion)}${row("Voz interior",e.voz)}${row("Pausa presente",e.pausa)}${row("Pasos hacia mis metas",e.metas)}${row("Algo bueno de hoy",e.bueno)}${row("Para contar en sesión",e.sesion)}${row("Mini plan para mañana",e.plan)}</dl>
+    <div class="body"><dl style="margin:0">${row("Emociones",emo)}${row("Áreas (1 a 5)",ar.join(" · "))}${row("Malestar corporal",e.malestar)}${row("Ansiedad o nervios",e.ansiedad)}${row("Preocupación",e.preocupacion)}${row("Voz interior",e.voz)}${row("Pausa presente",e.pausa)}${row("Pasos hacia mis metas",e.metas)}${row("Me cuidé",e.cuidados)}${row("Agradezco o logré",e.bueno)}${row("Me hizo bien o me dio sentido",e.sentido)}${row("Para traer a la sesión",e.sesion)}${row("Mini plan para mañana",e.plan)}</dl>
     <button class="linkbtn" data-edit="${k}">Editar este día</button></div></details>`}).join("")
     :`<div class="empty">Todavía no hay registros. Empiece hoy desde la pestaña <b>Hoy</b>: le lleva un par de minutos.</div>`;
   const wkKeys=Object.keys(weekly).sort().reverse();
